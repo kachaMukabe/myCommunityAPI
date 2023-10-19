@@ -8,10 +8,19 @@ from ariadne import (
 )
 from ariadne.explorer import ExplorerGraphiQL
 from flask import request, jsonify
+from api.mutations import resolve_create_event, resolve_login, resolve_signup
 
+query = ObjectType("Query")
+
+mutation = ObjectType("Mutation")
+mutation.set_field("signup", resolve_signup)
+mutation.set_field("login", resolve_login)
+mutation.set_field("create_event", resolve_create_event)
 
 type_defs = load_schema_from_path("schema.graphql")
-schema = make_executable_schema(type_defs, snake_case_fallback_resolvers)
+schema = make_executable_schema(
+    type_defs, query, mutation, snake_case_fallback_resolvers
+)
 
 explorer_html = ExplorerGraphiQL().html(None)
 

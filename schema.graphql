@@ -1,16 +1,47 @@
 schema {
   query: Query
+  mutation: Mutation
 }
+
+scalar Date
+scalar Time
+
+type LoginResult {
+  access_token: String
+  user: User
+}
+
 
 type User {
   id: Int
   username: String
 }
 
+type CommunityEvent {
+  id: Int
+  title: String
+  description: String
+  location: String
+  date: Date
+  time: Time
+  organizer: User
+}
+
+input EventInput {
+  title: String!
+  description: String
+  location: String
+  date: Date
+  time: Time
+}
+
 type Query {
-  login(username: String, password: String): User
+  users: [User]
+  events: [CommunityEvent]
 }
 
 type Mutation {
   signup(username: String!, password: String!): User
+  login(username: String!, password: String!): LoginResult
+  create_event(input: EventInput!): CommunityEvent
 }
