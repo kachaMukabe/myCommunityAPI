@@ -27,6 +27,19 @@ type CommunityEvent {
   organizer: User
 }
 
+type AssistanceRequest {
+  id: Int
+  description: String
+  assistance_type: String
+  user: User
+}
+
+input AssistanceRequestInput {
+  description: String!
+  assistance_type: String!
+}
+
+
 input EventInput {
   title: String!
   description: String
@@ -39,10 +52,14 @@ type Query {
   users: [User]
   events: [CommunityEvent]
   event(id: Int!): CommunityEvent
+  assistanceRequests: [AssistanceRequest]
+  assistanceRequest(id: Int!): AssistanceRequest
 }
 
 type Mutation {
   signup(username: String!, password: String!): User
   login(username: String!, password: String!): LoginResult
   create_event(input: EventInput!): CommunityEvent
+  createAssistanceRequest(input: AssistanceRequestInput!): AssistanceRequest
+  updateAssistanceRequest(id: Int!, input: AssistanceRequestInput!): AssistanceRequest
 }

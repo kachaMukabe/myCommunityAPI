@@ -1,5 +1,5 @@
 from api import db
-from api.models import CommunityEvent
+from api.models import CommunityEvent, AssistanceRequest
 from flask_jwt_extended import jwt_required, get_jwt_identity
 
 
@@ -10,4 +10,14 @@ def resolve_events(_, info):
 
 @jwt_required()
 def resolve_event(_, info, id):
-    return CommunityEvent.query.filter_by(id=id).first()
+    return CommunityEvent.query.get(id)
+
+
+@jwt_required()
+def resolve_assistance_requests(_, info):
+    return AssistanceRequest.query.all()
+
+
+@jwt_required()
+def resolve_assistance_request(_, info, id):
+    return AssistanceRequest.query.get(id)
