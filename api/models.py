@@ -14,4 +14,4 @@ class CommunityEvent(db.Model):
     location = db.Column(db.String(256))
     date = db.Column(db.Date)
     time = db.Column(db.Time)
-    organizer_id = db.Column(db.Integer, db.ForeignKey("User.id"), nullable=False)
+    organizer_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)

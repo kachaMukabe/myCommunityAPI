@@ -25,11 +25,8 @@ def resolve_login(_, info, username, password):
 @jwt_required()
 def resolve_create_event(_, info, input):
     current_user_id = get_jwt_identity()
-    print(current_user_id)
-    print("Hello")
 
     user = User.query.get(current_user_id)
-    print(user)
 
     if user:
         new_event = CommunityEvent(

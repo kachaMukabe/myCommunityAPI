@@ -9,8 +9,11 @@ from ariadne import (
 from ariadne.explorer import ExplorerGraphiQL
 from flask import request, jsonify
 from api.mutations import resolve_create_event, resolve_login, resolve_signup
+from api.queries import resolve_event, resolve_events
 
 query = ObjectType("Query")
+query.set_field("events", resolve_events)
+query.set_field("event", resolve_event)
 
 mutation = ObjectType("Mutation")
 mutation.set_field("signup", resolve_signup)

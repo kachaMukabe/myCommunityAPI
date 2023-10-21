@@ -38,6 +38,7 @@ input EventInput {
 type Query {
   users: [User]
   events: [CommunityEvent]
+  event(id: Int!): CommunityEvent
 }
 
 type Mutation {
